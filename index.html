@@ -1,31 +1,40 @@
-<div>
-  <p style="line-height: normal; color:black;font-family: Arial, Helvetica, sans-serif; padding-top:10px">
-    <small>
-    <strong>Kevin Flynn</strong>
-    </br>
-    Senior Grid Creator
-    </br>
-    +47 000 00 000
-    </br>
-    </small>
-  </p>
-  <p style="line-height: normal; color:black;font-family: Arial, Helvetica, sans-serif;">
-    <small>
-    <strong>Huddly</strong>
-    </br>
-    <a style="color:black;font-family: Arial, Helvetica, sans-serif;"
-      href="https://www.huddly.com/">huddly.com</a>
-    </br>
-    </br>
-    <a style="color:black;font-family: Arial, Helvetica, sans-serif;"
-      href="http://facebook.com/HuddlyInc">facebook.com/HuddlyInc</a>
-    </br>
-    <a style="color:black;font-family: Arial, Helvetica, sans-serif;"
-      href="http://twitter.com/HuddlyInc">twitter.com/HuddlyInc</a>
-    </br>
-    <a style="color:black;font-family: Arial, Helvetica, sans-serif;"
-      href="http://linkedin.com/company/huddly">linkedin.com/company/Huddly</a>
-    </small>
-  </p>
-  <img src="https://huddly.github.io/email-signature/Huddly-Logo-Black-2x.png" alt="Huddly Logo" width="40" height="53" style="padding-top: 6px" />
-</div>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huddly Email Signature Generator</title>
+    <link rel="stylesheet" href="src/styles/main.css">
+</head>
+
+<body>
+    <main>
+        <form action="" class="form" id="signature-form">
+            <h1>Fill at your details and generate your e-mail signature</h1>
+
+            <div class="form-group">
+                <label for="name">Full name</label>
+                <input type="text" class="form-control" data-signature-input="name" placeholder="John Doe">
+            </div>
+            <div class="form-group">
+                <label for="email">Role</label>
+                <input type="text" class="form-control" data-signature-input="role" placeholder="Designer">
+            </div>
+            <div class="form-group">
+                <label for="email">Phone number</label>
+                <input type="tel" class="form-control" data-signature-input="phone" placeholder="+47 123 45 678">
+            </div>
+            <div class="form-group">
+                <input type="button" class="form-control" value="Copy signature code" id="copy-signature">
+            </div>
+        </form>
+
+        <div id="signature-preview"></div>
+
+    </main>
+
+    <script src="dist/bundle.js"></script>
+</body>
+
+</html>
