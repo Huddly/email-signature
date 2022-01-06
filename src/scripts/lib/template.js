@@ -1,9 +1,8 @@
-const template = `<div>
+const template = (content) =>
+	`<div>
   <p style="line-height: normal; color:black;font-family: Arial, Helvetica, sans-serif; padding-top:10px">
     <small>
-      <strong><span id="name"></span></strong></br>
-      <span id="role"></span></br>
-      <span id="phone"></span></br>
+      ${content}
     </small>
   </p>
   <p style="line-height: normal; color:black;font-family: Arial, Helvetica, sans-serif;">
@@ -24,7 +23,7 @@ const template = `<div>
       href="http://linkedin.com/company/huddly">linkedin.com/company/Huddly</a>
     </small>
   </p>
-  <img src="https://huddly.github.io/email-signature/Huddly-Logo-Black-2x.png" alt="Huddly Logo" width="40" height="53" style="padding-top: 6px" />
+  <img src="https://huddly.github.io/email-signature/images/Huddly-Logo-Black-2x.png" alt="Huddly Logo" width="40" height="53" style="padding-top: 6px" />
 </div>`;
 
 export default template;

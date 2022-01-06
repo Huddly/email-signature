@@ -3,6 +3,7 @@ body {
 	align-items: center;
 	min-height: 100vh;
 	margin: 0;
+	background-color: #f5f5f5;
 	font-family: 'Helvetica', sans-serif;
 }
 
@@ -10,13 +11,13 @@ main {
 	align-items: center;
 	justify-content: space-evenly;
 	width: 100%;
-	max-width: 1000px;
+	max-width: 1200px;
 	margin: 40px auto;
 }
 
 form {
-	margin: 0px 40px;
-	border-bottom: 1px solid #ccc;
+	max-width: 400px;
+	margin: 0px 40px 40px 40px;
 }
 
 form h1 {
@@ -58,22 +59,56 @@ label {
 	cursor: pointer;
 }
 
+.form-control[type='button'].secondary {
+	border: 1px solid #5a73dd;
+	background-color: #fff;
+	color: #5a73dd;
+}
+
+.support-link {
+	color: #5a73dd;
+	font-size: 16px;
+}
+
+.gmail-mockup {
+	margin: 20px;
+	background-color: #fff;
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
+}
+
 #signature-preview {
-	padding: 0px 40px;
+	padding: 0 28px 28px 28px;
+}
+
+.gmail-mockup .gmail-mockup-img {
+	width: 100%;
+	cursor: not-allowed;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-drag: none;
+	-webkit-user-drag: none;
+}
+
+@media (min-width: 1200px) {
+	main {
+		gap: 40px;
+	}
 }
 
 @media (min-width: 768px) {
 	main {
 		display: flex;
-		flex: 50% 0 0;
-		gap: 40px;
 	}
 
 	form {
+		position: relative;
 		width: 50%;
-		margin: 0;
-		padding: 0px 40px;
-		border-right: 1px solid #ccc;
-		border-bottom: 0;
+		margin: 0px 40px;
+	}
+	.form-group.buttons {
+		flex-direction: row;
+		gap: 16px;
 	}
 }
