@@ -1,0 +1,114 @@
+body {
+	display: flex;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+	background-color: #f5f5f5;
+	font-family: 'Helvetica', sans-serif;
+}
+
+main {
+	align-items: center;
+	justify-content: space-evenly;
+	width: 100%;
+	max-width: 1200px;
+	margin: 40px auto;
+}
+
+form {
+	max-width: 400px;
+	margin: 0px 40px 40px 40px;
+}
+
+form h1 {
+	margin-bottom: 32px;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 18px;
+}
+
+label {
+	margin-bottom: 8px;
+}
+
+.form-control {
+	width: 100%;
+	height: 40px;
+	margin-bottom: 10px;
+	padding: 0 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 16px;
+}
+
+.form-control[type='button'] {
+	display: inline-flex;
+	align-items: center;
+	width: fit-content;
+	height: 42px;
+	padding: 8px 20px;
+	border: 1px solid #5a73dd;
+	background-color: #5a73dd;
+	color: #fff;
+	line-height: 1;
+	text-decoration: none;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.form-control[type='button'].secondary {
+	border: 1px solid #5a73dd;
+	background-color: #fff;
+	color: #5a73dd;
+}
+
+.support-link {
+	color: #5a73dd;
+	font-size: 16px;
+}
+
+.gmail-mockup {
+	margin: 20px;
+	background-color: #fff;
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
+}
+
+#signature-preview {
+	padding: 0 28px 28px 28px;
+}
+
+.gmail-mockup .gmail-mockup-img {
+	width: 100%;
+	cursor: not-allowed;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-drag: none;
+	-webkit-user-drag: none;
+}
+
+@media (min-width: 1200px) {
+	main {
+		gap: 40px;
+	}
+}
+
+@media (min-width: 768px) {
+	main {
+		display: flex;
+	}
+
+	form {
+		position: relative;
+		width: 50%;
+		margin: 0px 40px;
+	}
+	.form-group.buttons {
+		flex-direction: row;
+		gap: 16px;
+	}
+}
