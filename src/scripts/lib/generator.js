@@ -14,7 +14,6 @@ class SignatureGenerator {
 	}
 
 	renderPreview(event) {
-		// Get all the input placeholders and update the preview
 		const inputs = this.getInputs();
 
 		let out = '';
@@ -31,7 +30,7 @@ class SignatureGenerator {
 					out += `<strong>${input.value}</strong>${br}`;
 					break;
 				case 'phone':
-					const phone = this.formattedPhone(input.value);
+					const phone = this.formatPhone(input.value);
 					out += `<a style="color:black;font-family: Arial, Helvetica, sans-serif;" href="tel:${input.value}">${phone}</a>${br}`;
 					break;
 				default:
@@ -39,8 +38,12 @@ class SignatureGenerator {
 			}
 		});
 
-		// Render the initial template
-		this.preview.innerHTML = template(out);
+		// Render the template
+		// Debounce the rendering
+		clearTimeout(this.timeout);
+		this.timeout = setTimeout(() => {
+			this.preview.innerHTML = template(out);
+		}, 300);
 	}
 
 	registerEvents() {
@@ -91,14 +94,12 @@ class SignatureGenerator {
 		}, 1500);
 	}
 
-	formattedPhone(number) {
+	formatPhone(number) {
 		const phone = new PhoneNumber(number);
-
 		if (phone.isValid()) {
 			return phone.getNumber('international');
-		} else {
-			return number;
 		}
+		return number;
 	}
 
 	minifyCode(code) {
@@ -109,7 +110,7 @@ class SignatureGenerator {
 		const inputs = this.getInputs();
 		inputs.forEach((input) => {
 			const urlParam = new URL(window.location.href).searchParams.get(input.dataset.signature);
-			if (urlParam) {
+			if (urlParam !== null) {
 				input.value = urlParam;
 			}
 		});
@@ -117,11 +118,7 @@ class SignatureGenerator {
 
 	updateUrlParameter(input) {
 		const url = new URL(window.location.href);
-		if (input.value) {
-			url.searchParams.set(input.dataset.signature, input.value);
-		} else {
-			url.searchParams.delete(input.dataset.signature);
-		}
+		url.searchParams.set(input.dataset.signature, input.value);
 		window.history.replaceState({}, '', url);
 	}
 }
