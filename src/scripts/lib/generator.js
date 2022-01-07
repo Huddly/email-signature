@@ -8,17 +8,21 @@ class SignatureGenerator {
 	}
 
 	init() {
+		this.getUrlParameters();
 		this.renderPreview();
 		this.registerEvents();
 	}
 
-	renderPreview() {
-		// Get all the input placeholders and update the preview
+	renderPreview(event) {
 		const inputs = this.getInputs();
 
 		let out = '';
 
 		inputs.forEach((input, index) => {
+			if (event) {
+				this.updateUrlParameter(input);
+			}
+
 			const br = index === inputs.length - 1 || !input.value ? '' : '<br>';
 
 			switch (input.dataset.style) {
@@ -26,7 +30,7 @@ class SignatureGenerator {
 					out += `<strong>${input.value}</strong>${br}`;
 					break;
 				case 'phone':
-					const phone = this.formattedPhone(input.value);
+					const phone = this.formatPhone(input.value);
 					out += `<a style="color:black;font-family: Arial, Helvetica, sans-serif;" href="tel:${input.value}">${phone}</a>${br}`;
 					break;
 				default:
@@ -34,8 +38,12 @@ class SignatureGenerator {
 			}
 		});
 
-		// Render the initial template
-		this.preview.innerHTML = template(out);
+		// Render the template
+		// Debounce the rendering
+		clearTimeout(this.timeout);
+		this.timeout = setTimeout(() => {
+			this.preview.innerHTML = template(out);
+		}, 300);
 	}
 
 	registerEvents() {
@@ -86,18 +94,32 @@ class SignatureGenerator {
 		}, 1500);
 	}
 
-	formattedPhone(number) {
+	formatPhone(number) {
 		const phone = new PhoneNumber(number);
-
 		if (phone.isValid()) {
 			return phone.getNumber('international');
-		} else {
-			return number;
 		}
+		return number;
 	}
 
 	minifyCode(code) {
 		return code.replace(/\n/g, '');
+	}
+
+	getUrlParameters() {
+		const inputs = this.getInputs();
+		inputs.forEach((input) => {
+			const urlParam = new URL(window.location.href).searchParams.get(input.dataset.signature);
+			if (urlParam !== null) {
+				input.value = urlParam;
+			}
+		});
+	}
+
+	updateUrlParameter(input) {
+		const url = new URL(window.location.href);
+		url.searchParams.set(input.dataset.signature, input.value);
+		window.history.replaceState({}, '', url);
 	}
 }
 
