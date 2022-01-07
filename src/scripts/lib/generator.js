@@ -8,17 +8,22 @@ class SignatureGenerator {
 	}
 
 	init() {
+		this.getUrlParameters();
 		this.renderPreview();
 		this.registerEvents();
 	}
 
-	renderPreview() {
+	renderPreview(event) {
 		// Get all the input placeholders and update the preview
 		const inputs = this.getInputs();
 
 		let out = '';
 
 		inputs.forEach((input, index) => {
+			if (event) {
+				this.updateUrlParameter(input);
+			}
+
 			const br = index === inputs.length - 1 || !input.value ? '' : '<br>';
 
 			switch (input.dataset.style) {
@@ -98,6 +103,26 @@ class SignatureGenerator {
 
 	minifyCode(code) {
 		return code.replace(/\n/g, '');
+	}
+
+	getUrlParameters() {
+		const inputs = this.getInputs();
+		inputs.forEach((input) => {
+			const urlParam = new URL(window.location.href).searchParams.get(input.dataset.signature);
+			if (urlParam) {
+				input.value = urlParam;
+			}
+		});
+	}
+
+	updateUrlParameter(input) {
+		const url = new URL(window.location.href);
+		if (input.value) {
+			url.searchParams.set(input.dataset.signature, input.value);
+		} else {
+			url.searchParams.delete(input.dataset.signature);
+		}
+		window.history.replaceState({}, '', url);
 	}
 }
 
